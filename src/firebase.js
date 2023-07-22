@@ -1,4 +1,9 @@
 /* eslint-disable no-undef */
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+
+
 export const firebaseConfig = {
     apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -8,5 +13,8 @@ export const firebaseConfig = {
     appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID
 };
 
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
-export default firebaseConfig
+export { auth, db };

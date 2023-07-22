@@ -6,12 +6,70 @@ import ImageIcon from '@mui/icons-material/Image';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import { CalendarViewDay, EventNote } from "@mui/icons-material";
 import Posts from "./Posts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+// Firebaase
+import { db } from "../firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { onSnapshot, query, orderBy } from "firebase/firestore";
+
 
 const Feed = () => {
-    const [posts, setPosts] = useState("")
-    const handleSubmit = (e) => {
+    const [posts, setPosts] = useState([])
+    const [input, setInput] = useState("")
+
+
+    useEffect(() => {
+
+        const unsubscribe = onSnapshot(
+            query(collection(db, "posts"), orderBy("timestamp", "desc")),
+            (snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    }))
+                );
+            }
+        );
+
+        // Cleanup the listener when the component unmounts
+        return () => unsubscribe();
+
+        // db.collection("posts").orderBy("timestamp", "desc").onSnapshot(snapshot => (
+        //     setPosts(snapshot.docs.map(doc => (
+        //         {
+        //             id: doc.id,
+        //             data: doc.data()
+        //         }
+        //     )))
+        // ))
+    }, [])
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        try {
+            await addDoc(collection(db, "posts"), {
+                name: "Mohammed Saif",
+                description: "Testing Firebase Config",
+                message: input,
+                photoUrl: "",
+                timestamp: serverTimestamp(),
+            });
+
+            setInput("");
+        } catch (error) {
+            console.log(error)
+        }
+
+        // db.collection('posts').add({
+        //     name: 'Mohammed Saif',
+        //     description: "Testing Firebase Config",
+        //     message: input,
+        //     photoUrl: "",
+        //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        // })
     }
 
     return (
@@ -20,7 +78,7 @@ const Feed = () => {
                 <div className="feed__input">
                     <CreateIcon />
                     <form onSubmit={handleSubmit}>
-                        <input type="text" />
+                        <input type="text" value={input} onChange={e => setInput(e.target.value)} />
                         <button type="submit">Send</button>
                     </form>
                 </div>
@@ -33,7 +91,13 @@ const Feed = () => {
             </div>
 
             {/* Posts */}
-            {/* {posts.map((post) => <Post />)} */}
+            {posts.map(({ id, data: { name, description, message, photoUrl } }) => <Posts
+                key={id}
+                name={name}
+                description={description}
+                message={message}
+                photoUrl={photoUrl}
+            />)}
             <Posts name="Mohammed Saif" description={"This is a Test"} message="Working Message" />
         </div>
     )
