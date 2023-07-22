@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import "./Feed.css"
 import CreateIcon from '@mui/icons-material/Create';
 import InputOption from "./InputOption";
@@ -9,7 +10,6 @@ import { useState } from "react";
 
 const Feed = () => {
     const [posts, setPosts] = useState("")
-
     const handleSubmit = (e) => {
         e.preventDefault()
     }
