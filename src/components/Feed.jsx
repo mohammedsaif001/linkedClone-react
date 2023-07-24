@@ -57,7 +57,6 @@ const Feed = () => {
             console.log(error)
         }
     }
-    console.log(posts)
     return (
         <div className="feed">
             <div className="feed__inputContainer">

@@ -10,11 +10,10 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { forwardRef } from "react";
 
 const Posts = forwardRef(({ name, description, message, photoUrl }, ref) => {
-    console.log(photoUrl)
     return (
         <div ref={ref} className="post">
             <div className="post__header">
-                <Avatar src={photoUrl}>{name[0][0].toUpperCase()}</Avatar>
+                <Avatar src={photoUrl}></Avatar>
                 <div className="post__info">
                     <h2>{name}</h2>
                     <p>{description}</p>

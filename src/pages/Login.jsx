@@ -28,8 +28,8 @@ const Login = () => {
                 login({
                     email: userAuth.user.email,
                     uid: userAuth.user.uid,
-                    displayName: name,
-                    photoURL: profilePic,
+                    displayName: userAuth.user.displayName,
+                    photoURL: userAuth.user.photoURL,
                 })
             );
         } catch (err) {
