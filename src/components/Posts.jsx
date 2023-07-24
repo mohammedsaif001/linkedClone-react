@@ -10,6 +10,7 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import { forwardRef } from "react";
 
 const Posts = forwardRef(({ name, description, message, photoUrl }, ref) => {
+    console.log(photoUrl)
     return (
         <div ref={ref} className="post">
             <div className="post__header">

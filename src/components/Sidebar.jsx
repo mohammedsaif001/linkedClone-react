@@ -18,9 +18,9 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="sidebar__top">
                 <img src="https://media.licdn.com/dms/image/C5616AQGSsy-vq2pKUQ/profile-displaybackgroundimage-shrink_350_1400/0/1638816488274?e=1695254400&v=beta&t=4bS8ALBZgL-8F0590_oscfHbanSfEdIxcwIARHOH8qM" alt="cover_image" />
-                <Avatar className="sidebar__avatar" src={user.profileURL} >{user?.displayName[0][0].toUpperCase()}</Avatar>
-                <h2>{user.displayName}</h2>
-                <h4>{user.email}</h4>
+                <Avatar className="sidebar__avatar" src={user?.photoURL} >{user?.displayName[0][0].toUpperCase()}</Avatar>
+                <h2>{user?.displayName}</h2>
+                <h4>{user?.email}</h4>
             </div>
 
             <div className="sidebar__stats">

@@ -48,7 +48,7 @@ const Feed = () => {
                 name: user?.displayName,
                 description: user?.email,
                 message: input,
-                photoUrl: user.profileURL || "",
+                photoUrl: user?.photoURL || "",
                 timestamp: serverTimestamp(),
             });
 
@@ -57,7 +57,7 @@ const Feed = () => {
             console.log(error)
         }
     }
-
+    console.log(posts)
     return (
         <div className="feed">
             <div className="feed__inputContainer">

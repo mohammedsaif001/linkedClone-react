@@ -38,14 +38,6 @@ const Login = () => {
     }
     async function loginUser(e) {
         e.preventDefault()
-        // auth.signInWithEmailAndPassword(email, password).then(userAuth => {
-        //     dispatch(login({
-        //         email: userAuth.user.email,
-        //         uid: userAuth.user.uid,
-        //         displayName: userAuth.user.displayName,
-        //         profileURL: userAuth.user.photoURL
-        //     }))
-        // }).catch((err) => alert(err.message))
 
         try {
             const userAuth = await signInWithEmailAndPassword(auth, email, password);
@@ -54,7 +46,7 @@ const Login = () => {
                     email: userAuth.user.email,
                     uid: userAuth.user.uid,
                     displayName: userAuth.user.displayName,
-                    profileURL: userAuth.user.photoURL,
+                    photoURL: userAuth.user.photoURL,
                 })
             );
         } catch (err) {
