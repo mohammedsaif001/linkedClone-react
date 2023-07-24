@@ -12,12 +12,15 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { onSnapshot, query, orderBy } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectUser } from "../feature/userSlice";
 
 
 const Feed = () => {
     const [posts, setPosts] = useState([])
     const [input, setInput] = useState("")
 
+    const user = useSelector(selectUser)
 
     useEffect(() => {
 
@@ -41,10 +44,10 @@ const Feed = () => {
 
         try {
             await addDoc(collection(db, "posts"), {
-                name: "Mohammed Saif",
-                description: "Testing Firebase Config",
+                name: user?.displayName,
+                description: user?.email,
                 message: input,
-                photoUrl: "",
+                photoUrl: user.profileURL || "",
                 timestamp: serverTimestamp(),
             });
 
