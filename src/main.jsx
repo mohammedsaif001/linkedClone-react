@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { ErrorBoundary } from 'react-error-boundary'
+import { Provider } from 'react-redux'
+import store from './app/store.js'
 
 function Fallback({ error, }) {
   return (
@@ -17,7 +19,9 @@ function Fallback({ error, }) {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={Fallback}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>,
 )

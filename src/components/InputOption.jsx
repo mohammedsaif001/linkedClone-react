@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./InputOption.css"
 
 
@@ -5,7 +6,7 @@ const InputOption = ({ title, Icon, color }) => {
     return (
         <div className="inputOption">
             <Icon style={{ color: color }} />
-            <h4>{title}</h4>
+            <h5>{title}</h5>
         </div>
     )
 }

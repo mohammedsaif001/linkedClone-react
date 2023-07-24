@@ -32,18 +32,8 @@ const Feed = () => {
                 );
             }
         );
-
-        // Cleanup the listener when the component unmounts
         return () => unsubscribe();
 
-        // db.collection("posts").orderBy("timestamp", "desc").onSnapshot(snapshot => (
-        //     setPosts(snapshot.docs.map(doc => (
-        //         {
-        //             id: doc.id,
-        //             data: doc.data()
-        //         }
-        //     )))
-        // ))
     }, [])
 
     const handleSubmit = async (e) => {
@@ -62,14 +52,6 @@ const Feed = () => {
         } catch (error) {
             console.log(error)
         }
-
-        // db.collection('posts').add({
-        //     name: 'Mohammed Saif',
-        //     description: "Testing Firebase Config",
-        //     message: input,
-        //     photoUrl: "",
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        // })
     }
 
     return (
