@@ -7,10 +7,11 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import { forwardRef } from "react";
 
-const Posts = ({ name, description, message, photoUrl }) => {
+const Posts = forwardRef(({ name, description, message, photoUrl }, ref) => {
     return (
-        <div className="post">
+        <div ref={ref} className="post">
             <div className="post__header">
                 <Avatar src={photoUrl}>{name[0][0].toUpperCase()}</Avatar>
                 <div className="post__info">
@@ -31,5 +32,5 @@ const Posts = ({ name, description, message, photoUrl }) => {
             </div>
         </div>
     )
-}
+})
 export default Posts

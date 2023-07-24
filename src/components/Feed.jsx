@@ -7,6 +7,7 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import { CalendarViewDay, EventNote } from "@mui/icons-material";
 import Posts from "./Posts";
 import { useEffect, useState } from "react";
+import FlipMove from "react-flip-move";
 
 // Firebaase
 import { db } from "../firebase";
@@ -76,14 +77,17 @@ const Feed = () => {
             </div>
 
             {/* Posts */}
-            {posts.map(({ id, data: { name, description, message, photoUrl } }) => <Posts
-                key={id}
-                name={name}
-                description={description}
-                message={message}
-                photoUrl={photoUrl}
-            />)}
-            <Posts name="Mohammed Saif" description={"This is a Test"} message="Working Message" />
+
+            {/* FlipMove library uses Ref of the element so inside Posts add ForwardRef */}
+            <FlipMove>
+                {posts.map(({ id, data: { name, description, message, photoUrl } }) => <Posts
+                    key={id}
+                    name={name}
+                    description={description}
+                    message={message}
+                    photoUrl={photoUrl}
+                />)}
+            </FlipMove>
         </div>
     )
 }
